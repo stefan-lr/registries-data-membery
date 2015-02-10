@@ -1,0 +1,206 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/transfer#",
+    "new": {
+        "table": "transfers",
+        "title": "Nová Zmena kl. príslušnosti",
+        "xxtransCode": "schema.transfer.title",
+        "listFields": [
+            {
+                "field": "baseData.player.refData.name",
+                "title": "Meno"
+            },
+            {
+                "field": "baseData.player.refData.surName",
+                "title": "Priezvisko"
+            },
+            {
+                "field": "baseData.clubFrom.refData.name",
+                "title": "Z klubu"
+            },
+            {
+                "field": "baseData.clubTo.refData.name",
+                "title": "Do klubu"
+            }
+        ],
+        "properties": {
+            "_security": {
+                "_create": {
+                    "_static": [
+                        "Security - write"
+                    ]
+                },
+                "_read": {
+                    "_static": [
+                        "Security - read"
+                    ]
+                },
+                "_modify": {
+                    "_static": [
+                        "Security - write"
+                    ]
+                }
+            },
+            "baseData": {
+                "title": "Základné údaje",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "type": "string",
+                        "required": true
+                    },
+                    "player": {
+                        "title": "Hráč",
+                        "type": "string",
+                        "required": true,
+                        "$objectLink": {
+                            "registry": "people",
+                            "surName": "baseData.surName",
+                            "name": "baseData.name",
+                            "playerLicense": "player.playerLicense"
+                        }
+                    },
+                    "clubFrom": {
+                        "title": "Z klubu",
+                        "type": "string",
+                        "required": true,
+                        "$objectLink": {
+                            "registry": "organizations",
+                            "name": "club.name"
+                        }
+                    },
+                    "clubTo": {
+                        "title": "Do klubu",
+                        "type": "string",
+                        "required": true,
+                        "$objectLink": {
+                            "registry": "organizations",
+                            "name": "club.name"
+                        }
+                    },
+                    "season": {
+                        "title": "Súťažný ročnik",
+                        "$objectLink": {
+                            "registry": "seasons",
+                            "name": "baseData.name"
+                        },
+                        "required": true
+                    },
+                    "typeOfTransfer": {
+                        "title": "Typ zmeny",
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "prestup",
+                            "hosťovanie",
+                            "striedavý štart",
+                            "zahr. transfer"
+                        ],
+						"enumTransCodes":[
+							"schema.transfer.typ.transfer",
+							"schema.transfer.typ.hosting",
+							"schema.transfer.typ.alternating.start",
+							"schema.transfer.typ.foreign.transfer"
+						],
+                        "render": {
+                            "component": "psui-selectbox",
+                            "searchable": true
+                        }
+                    },
+                    "dateOfRealization": {
+                        "title": "Dátum realizácie",
+                        "type": "string",
+                        "required": true,
+                        "render": {
+                            "component": "psui-datepicker"
+                        }
+                    },
+                    "dateFrom": {
+                        "title": "Začiatok hosťovania",
+                        "type": "string",
+                        "required": false,
+                        "render": {
+                            "component": "psui-datepicker"
+                        }
+                    },
+                    "dateTo": {
+                        "title": "Koniec hosťovania",
+                        "type": "string",
+                        "required": false,
+                        "render": {
+                            "component": "psui-datepicker"
+                        }
+                    },
+                    "deliveredOn": {
+                        "title": "Dátum doručenia",
+                        "type": "string",
+                        "required": false,
+                        "render": {
+                            "component": "psui-datepicker"
+                        }
+                    },
+                    "stateOfTransfer": {
+                        "title": "Stav",
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "schválený",
+                            "neschválený",
+                            "storno",
+                            "v riešení"
+                        ],
+						"enumTransCodes":[
+							"schema.transfer.state.approved",
+							"schema.transfer.state.unapproved",
+							"schema.transfer.state.cancel",
+							"schema.transfer.state.in.process"
+						],
+                        "render": {
+                            "component": "psui-selectbox",
+                            "searchable": true
+                        }
+                    },
+                    "active": {
+                        "title": "Aktívny",
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "ano",
+                            "nie"
+                        ],
+						"enumTransCodes":[
+							"schema.transfer.active.yes",
+							"schema.transfer.active.no"
+						],
+                        "render": {
+                            "component": "psui-selectbox",
+                            "searchable": true
+                        }
+                    },
+                    "note": {
+                        "title": "Poznámka",
+                        "type": "string",
+                        "required": false,
+                        "large": true
+                    }
+                }
+            }
+        }
+    },
+    "view": {
+        "$ref": "uri://registries/transfer#new"
+    },
+    "search": {
+        "table": "transfers",
+        "title": "Zmena kl. príslušnosti",
+        "listFields": {
+            "$ref": "uri://registries/transfer#new/listFields"
+        },
+        "properties": {
+            "baseData": {
+                "$ref": "uri://registries/transfer#new/properties/baseData"
+            }
+        }
+    }
+}

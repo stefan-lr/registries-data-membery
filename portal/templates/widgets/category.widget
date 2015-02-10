@@ -1,0 +1,9 @@
+<div class="x-portal-widget-category">{% for article in data.articles %}
+	<article>
+			{% if article.img.img %}<img src="{{ article.img.img|safe }}">{% endif %}
+			<div >
+				<div><a href="/article/{{ article.id }}">{{ article.title|safe }}</a></div>
+				<div>{{ article.abstract|safe }}</div>
+			<div>
+	</article>
+{% endfor %}</div>

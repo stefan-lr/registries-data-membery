@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"  moznomarginboxes mozdisallowselectionprint><!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title></title>
+	<meta name="author" content="" />
+	<meta name="description" content="" />
+	<meta name="copyright" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<!--<link rel="stylesheet" href="css/bootstrap-theme.css" />-->
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="dataset/get/css/custom.css" />
+	<link rel="stylesheet" href="css/psui-uploadable-image.css" />
+	<link rel="stylesheet" href="css/psui-imageresizor.css" />
+	<link rel="stylesheet" href="css/psui-notification.css" />
+	<link rel="stylesheet" href="css/psui-selectbox.css" />
+	<link rel="stylesheet" href="css/portal-editor.css" />
+	<link rel="stylesheet" href="portal/css/portal.css" />
+	<link rel="stylesheet" href="css/x.css" />
+	<link rel="stylesheet" href="lib/components-font-awesome/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="img/icon.ico" />
+
+	<script src="js/modernizr.js"></script>
+
+	<script src="lib/rangy/rangy-core.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-route/angular-route.js"></script>
+	<script src="lib/angular-cookies/angular-cookies.js"></script>
+	<script src="lib/angular-translate/angular-translate.js"></script>
+	<script src="lib/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
+	<script src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+	<script src="lib/angular-ui-ace/ui-ace.js"></script>
+	<script src="js/security.js"></script>
+	<script src="js/personalPage.js"></script>
+	<script src="js/statistics.js"></script>
+	<script src="js/massmailing.js"></script>
+	<script src="js/registry.js"></script>
+	<script src="js/registries.js"></script>
+	<script src="js/schema-utils.js"></script>
+	<script src="js/generic-search.js"></script>
+	<script src="js/generators.js"></script>
+	<script src="js/schema-editor.js"></script>
+	<script src="js/psui.js"></script>
+	<script src="js/xpsui.js"></script>
+	<script src="js/psui-uploadable-image.js"></script>
+	<script src="js/psui-uploadable-file.js"></script>
+	<script src="js/psui-imageresizor.js"></script>
+	<script src="js/psui-notification.js"></script>
+	<script src="js/psui-contenteditable.js"></script>
+	<script src="js/psui-datepicker.js"></script>
+	<script src="js/psui-form-controller.js"></script>
+	<script src="js/psui-default-src.js"></script>
+	<script type="application/javascript" src="js/psui.js"></script>
+	<script src="js/psui-selectbox.js"></script>
+	<script src="js/translations.js"></script>
+	<script src="dataset/get/js/translations.js"></script>
+	<script src="js/psui-validity-mark.js"></script>
+	<script src="js/psui-objectlink.js"></script>
+	<script src="js/safeUrlEncoder.js"></script>
+	<script src="js/portal/portal-editor.js"></script>
+	<script src="js/xpsui.min.js"></script>
+	<script src="js/x-main.min.js"></script>
+	<script type="text/javascript">
+		function menuMouseWheelHandler(){
+
+		}
+	</script>
+</head>
+<body ng-app="registries">
+	<div psui-notification></div>
+	<div id="main-wrapper" ng-class="{'login-page': !security.currentUser}" ng-class="{'main-menu-active': app.mainMenu}">
+		<header ng-include="'partials/header.html'"></header>
+		<div id="main-menu" class="" ng-show="app.mainMenu" ng-include="'dataset/get/partials/main-menu.html'"></div>
+		<div psui-notification></div>
+		<div id="content-wrapper">
+			<div id="content">
+				<ng-view></ng-view>
+				<footer>
+					<div class="footer-content container-fluid">
+						<div class="row">
+							<div class="col-lg-3">
+								&copy; Copyright 2014 Unionsoft s r. o.
+							</div>
+							<div class="col-lg-9 version">
+								CODEBASE : Version ##CODEBASE_VERSION_PLACEHOLDER##, Commit ##CODEBASE_COMMIT_PLACEHOLDER##, Build date ##CODEBASE_BUILDDATE_PLACEHOLDER##<br/>DATASET: Version ##DATASET_VERSION_PLACEHOLDER##, Commit ##DATASET_COMMIT_PLACEHOLDER##
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div class="x-portal-widget-showcase-view">{% for article in data.articles %}
+	<article>
+	{% if article.img.img %}<div style="background: url('{{ article.img.img|safe }}'); background-repeat: no-repeat; background-size: cover; height: 492px; width: 100%;"></div>{% endif %}
+	<div class="x-portal-widget-showcase-view-container">
+		<div class="x-portal-widget-showcase-view-textblock">
+			<a href="/article/{{ article.id }}">{{ article.title|safe }}</a>
+			{{ article.abstract|safe }}
+		</div>
+	</div>
+	</article>
+{% endfor %}</div>

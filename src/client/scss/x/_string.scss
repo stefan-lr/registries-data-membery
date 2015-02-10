@@ -1,0 +1,8 @@
+
+.x-string-view {
+	@include inline-view();
+}
+
+.x-string-edit {
+	@include inline-edit();
+}

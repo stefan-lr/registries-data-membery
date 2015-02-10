@@ -1,0 +1,134 @@
+{
+	"$schema" : "http://json-schema.org/schema#",
+	"id" : "uri://registries/person#",
+	
+	"new" : {
+		"table" : "people",
+		"title" : "Osoba",
+		"transCode": "schema.member.new",
+		"properties" : {
+			"baseData" : {
+				"$ref": "uri://registries/people#person/properties/baseData"
+			},
+			"contactInfo": {
+				"$ref": "uri://registries/people#person/properties/contactInfo"
+			},
+			"player": {
+				"$ref": "uri://registries/people#person/properties/player"
+			},
+			"coach": {
+				"$ref": "uri://registries/people#person/properties/coach"
+			},
+			"referee": {
+				"$ref": "uri://registries/people#person/properties/referee"
+			},
+			"officer": {
+				"$ref": "uri://registries/people#person/properties/officer"
+			},
+			"medic": {
+				"$ref": "uri://registries/people#person/properties/medic"
+			},
+			"statistic": {
+				"$ref": "uri://registries/people#person/properties/statistic"
+			},
+			"photoInfo": {
+				"$ref": "uri://registries/people#person/properties/photoInfo"
+			},
+			"otherInfo": {
+				"$ref": "uri://registries/people#person/properties/otherInfo"
+			},
+			"idInfo": {
+				"$ref": "uri://registries/people#person/properties/idInfo"
+			}
+		}
+	},
+	"view" : {
+		"table" : "people",
+		"title" : "Osoba",
+		"transCode": "schema.member.view",
+		"clientActions": [
+			{
+				"__DIRECTIVE__": "action-link",
+				"title": "Tlač hráčskej licencie",
+				"schema": "uri://registries/player#view",
+				"template": "playerLicenseCard.html"
+			}
+		],
+		"properties" : {
+			"baseData" : {
+				"$ref": "uri://registries/people#person/properties/baseData"
+			},
+			"contactInfo": {
+				"$ref": "uri://registries/people#person/properties/contactInfo"
+			},
+			"player": {
+				"$ref": "uri://registries/people#person/properties/player"
+			},
+			"coach": {
+				"$ref": "uri://registries/people#person/properties/coach"
+			},
+			"referee": {
+				"$ref": "uri://registries/people#person/properties/referee"
+			},
+			"officer": {
+				"$ref": "uri://registries/people#person/properties/officer"
+			},
+			"medic": {
+				"$ref": "uri://registries/people#person/properties/medic"
+			},
+			"statistic": {
+				"$ref": "uri://registries/people#person/properties/statistic"
+			},
+			"photoInfo": {
+				"$ref": "uri://registries/people#person/properties/photoInfo"
+			},
+			"otherInfo": {
+				"$ref": "uri://registries/people#person/properties/otherInfo"
+			},
+			"idInfo": {
+				"$ref": "uri://registries/people#person/properties/idInfo"
+			}
+		}
+	},
+	
+	"search" : {
+		"table": "people",
+    	"title": "osoba",
+		"transCode":"schema.member.search",
+        "listFields": {
+            "$ref": "uri://registries/people#person/listFields"
+        },
+        "properties": {
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/people#person/properties/bankInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "coach": {
+				"$ref": "uri://registries/people#person/properties/coach"
+			},
+			"player": {
+				"$ref": "uri://registries/people#person/properties/player"
+			},
+			"referee": {
+				"$ref": "uri://registries/people#person/properties/referee"
+			},
+			"officer": {
+				"$ref": "uri://registries/people#person/properties/officer"
+			},
+			"statistic": {
+				"$ref": "uri://registries/people#person/properties/statistic"
+			},
+			"medic": {
+				"$ref": "uri://registries/people#person/properties/medic"
+			}
+        }
+	}
+}

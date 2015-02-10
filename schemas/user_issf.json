@@ -1,0 +1,29 @@
+{
+	"$schema" : "http://json-schema.org/schema#",
+	"id" : "uri://registries/user_issf#",
+	"new" : {
+		"table" : "people",
+		"title" : "Nova osoba",
+		"transCode": "schema.person.title",
+		"properties" : {
+			"baseData" : {
+				"$ref": "uri://registries/people#person/properties/baseData"
+			},
+			"additionalInfo": {
+				"$ref": "uri://registries/people#person/properties/additionalDataUserIssf"
+			},
+			"contactInfo": {
+				"$ref": "uri://registries/people#person/properties/contactInfo"
+			},
+			"loginInfo": {
+				"$ref": "uri://registries/people#person/properties/loginInfo"
+			}
+		}
+	},
+	"view" : {
+		"$ref" : "uri://registries/user_issf#new"
+	},
+	"search" : {
+		"$ref" : "uri://registries/user_issf#new"
+	}
+}

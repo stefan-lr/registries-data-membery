@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/player#",
+    "new": {
+        "title": "Hráč",
+        "table": "people",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/people#person/properties/_security"
+            },
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "player": {
+                "$ref": "uri://registries/people#person/properties/player"
+            },
+            "photoInfo": {
+                "$ref": "uri://registries/people#person/properties/photoInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "idInfo": {
+                "$ref": "uri://registries/people#person/properties/idInfo"
+            }
+        }
+    },
+	"view": {
+        "title": "Hráč",
+        "table": "people",
+		"clientActions": [
+			{
+				"__DIRECTIVE__": "action-link",
+				"title": "Tlač hráčskej licencie",
+				"schema": "uri://registries/player#view",
+				"template": "playerLicenseCard.html"
+			}
+		],
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/people#person/properties/_security"
+            },
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "player": {
+                "$ref": "uri://registries/people#person/properties/player"
+            },
+            "photoInfo": {
+                "$ref": "uri://registries/people#person/properties/photoInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "idInfo": {
+                "$ref": "uri://registries/people#person/properties/idInfo"
+            }
+        }
+    },
+    "search": {
+        "table": "people",
+        "title": "Hráč",
+        "listFields": {
+            "$ref": "uri://registries/people#person/properties/player/listFields"
+        },
+        "forcedCriteria": [
+            {
+                "f": "player.isPlayer",
+                "op": "eq",
+                "v": "Áno"
+            }
+        ],
+        "properties": {
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/people#person/properties/bankInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "player": {
+                "$ref": "uri://registries/people#person/properties/player"
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/association#",
+    "new": {
+        "table": "organizations",
+        "title": "Zväz",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/organization#properties/_security"
+            },
+            "association": {
+                "$ref": "uri://registries/organization#properties/association"
+            },
+            "associationAdress": {
+                "$ref": "uri://registries/organization#properties/associationAdress"
+            },
+            "logoInfo": {
+                "$ref": "uri://registries/organization#properties/logoInfo"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            }
+        }
+    },
+    "view": {
+        "table": "organizations",
+        "title": "Profil organizacie",
+        "transCode":"schema.association.view",
+        "properties": {
+	        "$ref": "uri://registries/association#new/properties"
+        }
+    },
+    "search": {
+        "table": "organizations",
+        "title": "Zväzy",
+        "listFields": [
+            {
+                "field": "association.associationName",
+                "title": "Názov zväzu"
+            }
+        ],
+        "forcedCriteria": [
+            {
+                "f": "association",
+                "op": "ex",
+                "v": ""
+            }
+        ],
+        "properties": {
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            },
+            "association": {
+                "$ref": "uri://registries/organization#properties/association"
+            },
+            "associationAdress": {
+                "$ref": "uri://registries/organization#properties/associationAdress"
+            }
+        }
+    }
+}

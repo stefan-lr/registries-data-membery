@@ -1,0 +1,1189 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/people#person",
+    "table": "people",
+    "title": "person",
+    "listFields": [
+        {
+            "field": "baseData.surName",
+            "title": "Priezvisko"
+        },
+        {
+            "field": "baseData.name",
+            "title": "Meno"
+        },
+        {
+            "field": "baseData.birthDate",
+            "title": "Dátum narodenia"
+        },
+        {
+            "field": "contactInfo.city",
+            "title": "Mesto"
+        }
+    ],
+    "properties": {
+        "systemCredentials": {
+            "$ref": "uri://registries/security#systemCredentials"
+        },
+        "_security": {
+            "_create": {
+                "_static": [
+                    "Security - write"
+                ]
+            },
+            "_read": {
+                "_static": [
+                    "Security - read"
+                ]
+            },
+            "_modify": {
+                "_static": [
+                    "Security - write"
+                ]
+            }
+        },
+        "baseData": {
+            "title": "Základné údaje",
+            "type": "object",
+            "properties": {
+                "registrationID": {
+                    "title": "Registračné číslo",
+                    "transCode": "schema.people.registrationID",
+                    "type": "string",
+                    "required": false
+                },
+                "id": {
+                    "title": "Identifikačné číslo",
+                    "transCode": "schema.people.identifier",
+                    "type": "string",
+                    "required": true,
+					"unique": {
+						"schema": "uri://registries/person",
+						"field": "baseData.id"
+					}
+                },
+                "name": {
+                    "title": "Meno",
+                    "transCode": "schema.people.name",
+                    "type": "string",
+                    "required": true
+                },
+                "surName": {
+                    "title": "Priezvisko",
+                    "transCode": "schema.people.surName",
+                    "type": "string",
+                    "required": true
+                },
+                "bornName": {
+                    "title": "Rodné priezvisko",
+                    "transCode": "schema.people.bornName",
+                    "type": "string",
+                    "required": false
+                },
+                "titleBefore": {
+                    "title": "Titul pred",
+                    "transCode": "schema.people.title.before",
+                    "type": "string",
+                    "required": false
+                },
+                "titleAfter": {
+                    "title": "Titul za",
+                    "transCode": "schema.people.title.after",
+                    "type": "string",
+                    "required": false
+                },
+                "birthDate": {
+                    "title": "Dátum narodenia",
+                    "transCode": "schema.people.birthDate",
+                    "type": "string",
+                    "required": true,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "gender": {
+                    "title": "Pohlavie",
+                    "transCode": "schema.people.gender",
+                    "type": " string",
+                    "enum": [
+                        "M",
+                        "Z"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.gender.man",
+                        "schema.people.gender.woman"
+                    ],
+                    "required": true,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "nationality": {
+                    "$ref": "uri://registries/nationality#country"
+                },
+                "stateOfPerson": {
+                    "title": "Stav osoby",
+                    "transCode": "schema.people.state.of.person",
+                    "type": "string",
+                    "enum": [
+                        "aktívna",
+                        "neaktívna"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.person.active",
+                        "schema.people.state.of.person.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                }
+            }
+        },
+        "referee": {
+            "title": "Rozhodca",
+            "type": "object",
+            "properties": {
+                "isReferee": {
+                    "title": "Je rozhodca",
+                    "transCode": "schema.people.isReferee",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "firstAssociation": {
+                    "title": "Prvotný zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "stateOfReferee": {
+                    "title": "Stav rozhodcu",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.referee.active",
+                        "schema.people.state.of.referee.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "association": {
+                    "title": "Aktuálny zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "firstYear": {
+                    "title": "Rok začiatku kariéry",
+                    "type": "string",
+                    "required": false
+                },
+                "proffesionalCompetence": {
+                    "title": "Odborná spôsobilosť od (rok)",
+                    "type": "string",
+                    "required": false
+                },
+                "dateOfRegistration": {
+                    "title": "Dátum registrácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "refereeLicense": {
+                    "title": "Rozhodcovská licencia",
+                    "type": "string",
+                    "required": false
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "coach": {
+            "title": "Tréner",
+            "type": "object",
+            "listFields": [
+                {
+                    "field": "coach.coachLicense",
+                    "title": "Číslo Lic"
+                },
+                {
+                    "field": "baseData.surName",
+                    "title": "Priezvisko"
+                },
+                {
+                    "field": "baseData.name",
+                    "title": "Meno"
+                },
+                {
+                    "field": "baseData.birthDate",
+                    "title": "Dátum narodenia"
+                },
+                {
+                    "field": "contactInfo.city",
+                    "title": "Mesto"
+                }
+            ],
+            "properties": {
+                "isCoach": {
+                    "title": "Je tréner",
+                    "transCode": "schema.people.isCoach",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "firstAssociation": {
+                    "title": "Prvotný zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "stateOfCoach": {
+                    "title": "Stav trénera",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.coach.active",
+                        "schema.people.state.of.coach.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "association": {
+                    "title": "Aktuálny zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "firstYear": {
+                    "title": "Rok začiatku kariéry",
+                    "type": "string",
+                    "required": false
+                },
+                "proffesionalCompetence": {
+                    "title": "Odborná spôsobilosť od (rok)",
+                    "type": "string",
+                    "required": false
+                },
+                "dateOfRegistration": {
+                    "title": "Dátum registrácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "coachLicense": {
+                    "title": "Trénerská licencia",
+                    "type": "string",
+                    "required": false
+                },
+                "coachLicenseType": {
+                    "title": "Typ licencie",
+                    "type": " string",
+                    "enum": [
+                        "I",
+                        "II",
+                        "III",
+                        "IV",
+                        "DT"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "feeDate": {
+                    "title": "Poplatky",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "licenseSeminar": {
+                    "title": "Licenčný seminár",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "officer": {
+            "title": "Funkcionár",
+            "type": "object",
+            "properties": {
+                "isOfficer": {
+                    "title": "Je funkcionár",
+                    "transCode": "schema.people.isOfficer",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "association": {
+                    "title": "Aktuálny zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "club": {
+                    "title": "Klubová príslušnosť",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "club.name"
+                    }
+                },
+                "note": {
+                    "title": "Poznámka",
+                    "transCode": "schema.people.note",
+                    "type": "string",
+                    "required": false,
+                    "large": true
+                },
+                "dateOfRegistration": {
+                    "title": "Dátum registrácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "expiration": {
+                    "title": "Platnosť do",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "stateOfOfficer": {
+                    "title": "Stav funkcionára",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.officer.active",
+                        "schema.people.state.of.officer.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "medic": {
+            "title": "Zdravotník",
+            "type": "object",
+            "properties": {
+                "isMedic": {
+                    "title": "Je zdravotník",
+                    "transCode": "schema.people.isMedic",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "medicLicense": {
+                    "title": "Číslo ZL",
+                    "transCode": "schema.people.medicLicense",
+                    "type": "string",
+                    "required": false
+                },
+                "stateOfMedic": {
+                    "title": "Stav zdravotníka",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.medic.active",
+                        "schema.people.state.of.medic.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validFrom": {
+                    "title": "Dátum platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validTo": {
+                    "title": "Doba platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "medicLicense": {
+                    "title": "Licencia",
+                    "type": "string",
+                    "required": false
+                },
+                "modifiedOn": {
+                    "title": "Dátum aktualizácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "statistic": {
+            "title": "Štatistik",
+            "type": "object",
+            "properties": {
+                "isStatistic": {
+                    "title": "Je štatistik",
+                    "transCode": "schema.people.isStatistic",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "statisticLicense": {
+                    "title": "Číslo ŠL",
+                    "transCode": "schema.people.statisticLicense",
+                    "type": "string",
+                    "required": false
+                },
+                "stateOfStatistic": {
+                    "title": "Stav štatistika",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.statistic.active",
+                        "schema.people.state.of.statistic.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validFrom": {
+                    "title": "Dátum platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validTo": {
+                    "title": "Doba platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "statisticLicense": {
+                    "title": "Licencia",
+                    "type": "string",
+                    "required": false
+                },
+                "modifiedOn": {
+                    "title": "Dátum aktualizácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "agent": {
+            "title": "Agent",
+            "type": "object",
+            "properties": {
+                "firstAssociation": {
+                    "title": "Prvotný zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "state": {
+                    "title": "Stav",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.agent.active",
+                        "schema.people.state.of.agent.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "association": {
+                    "title": "Zväzová príslušnosť",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "association.associationName"
+                    }
+                },
+                "expirationOfLicense": {
+                    "title": "Platnosť licencie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "expirationOfInsurance": {
+                    "title": "Platnosť poistenia",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "player": {
+            "title": "Hráč",
+            "type": "object",
+            "listFields": [
+                {
+                    "field": "player.playerLicense",
+                    "title": "Číslo HL"
+                },
+                {
+                    "field": "baseData.surName",
+                    "title": "Priezvisko"
+                },
+                {
+                    "field": "baseData.name",
+                    "title": "Meno"
+                },
+                {
+                    "field": "baseData.birthDate",
+                    "title": "Dátum narodenia"
+                },
+                {
+                    "field": "contactInfo.city",
+                    "title": "Mesto"
+                }
+            ],
+            "properties": {
+                "isPlayer": {
+                    "title": "Je hráč",
+                    "transCode": "schema.people.isPlayer",
+                    "type": " string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.profile.yes",
+                        "schema.people.profile.no"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "playerLicense": {
+                    "title": "Číslo HL",
+                    "transCode": "schema.people.playerLicense",
+                    "type": "string",
+                    "required": false
+                },
+                "clubOfFirstRegistration": {
+                    "title": "Materský klub",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "club.name"
+                    }
+                },
+                "club": {
+                    "title": "Klubová príslušnosť",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "club.name"
+                    }
+                },
+                "stateOfPlayer": {
+                    "title": "Stav hráča",
+                    "type": "string",
+                    "enum": [
+                        "aktívny",
+                        "neaktívny",
+                        "transfer"
+                    ],
+                    "enumTransCodes": [
+                        "schema.people.state.of.player.active",
+                        "schema.people.state.of.player.inactive"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "expirationOfProffesionalContract": {
+                    "title": "Profesionálna zmluva",
+                    "type": "string",
+                    "required": false
+                },
+                "expirationOfAgentContract": {
+                    "title": "Zmluva s agentom",
+                    "type": "string",
+                    "required": false
+                },
+                "expiration": {
+                    "title": "Platnosť do",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "registrationCanceled": {
+                    "title": "Zrušená registrácia",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfRegistration": {
+                    "title": "Dátum registrácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "hostingStartDate": {
+                    "title": "Dátum začiatku hosťovania",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "hostingEndDate": {
+                    "title": "Dátum konca hosťovania",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validFrom": {
+                    "title": "Dátum platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "validTo": {
+                    "title": "Doba platnosti",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "modifiedOn": {
+                    "title": "Dátum aktualizácie",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "futballUserIssf": {
+            "title": "Futbalový user",
+            "type": "object",
+            "properties": {
+                "Club": {
+                    "title": "Klub",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "baseData.name"
+                    }
+                },
+                "association": {
+                    "title": "Zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "baseData.name"
+                    }
+                }
+            }
+        },
+        "additionalDataUserIssf": {
+            "title": "Dodatočné informácie",
+            "type": "object",
+            "properties": {
+                "Club": {
+                    "title": "Klub",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "baseData.name"
+                    }
+                },
+                "association": {
+                    "title": "Zväz",
+                    "required": false,
+                    "$objectLink": {
+                        "registry": "organizations",
+                        "name": "baseData.name"
+                    }
+                }
+            }
+        },
+        "photoInfo": {
+            "title": "Fotografie",
+            "transCode": "schema.people.photoInfo",
+            "type": "object",
+            "properties": {
+                "photo": {
+                    "title": "Fotografia",
+                    "transCode": "schema.people.photo",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-uploadable-image",
+                        "height": 400,
+                        "width": 300
+                    }
+                }
+            }
+        },
+        "contactInfo": {
+            "title": "Kontaktné údaje",
+            "transCode": "schema.people.contactInfo",
+            "type": "object",
+            "properties": {
+                "street": {
+                    "title": "Ulica",
+                    "transCode": "schema.people.street",
+                    "type": "string",
+                    "required": false
+                },
+                "houseNumber": {
+                    "title": "Číslo domu",
+                    "transCode": "schema.people.houseNumber",
+                    "type": "string",
+                    "required": false
+                },
+                "city": {
+                    "$ref": "uri://registries/towns#town"
+                },
+                "zipCode": {
+                    "title": "PSČ",
+                    "transCode": "schema.people.zipCode",
+                    "type": "string",
+                    "required": false
+                },
+                "country": {
+                    "$ref": "uri://registries/countries#country"
+                },
+                "phoneNumber": {
+                    "title": "Telefón",
+                    "transCode": "schema.people.phoneNumber",
+                    "type": "string",
+                    "required": false
+                },
+                "mobileNumber": {
+                    "title": "Mobil",
+                    "transCode": "schema.people.mobileNumber",
+                    "type": "string",
+                    "required": false
+                },
+                "email": {
+                    "title": "E-mail",
+                    "transCode": "schema.people.email",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "bankInfo": {
+            "title": "Fakturačné údaje",
+            "transCode": "schema.people.bankInfo",
+            "type": "object",
+            "properties": {
+                "bankAccount": {
+                    "title": "Číslo účtu",
+                    "transCode": "schema.people.bankAccount",
+                    "type": "string",
+                    "required": false
+                },
+                "bankCode": {
+                    "title": "Kód banky",
+                    "transCode": "schema.people.bankCode",
+                    "type": "string",
+                    "required": false
+                },
+                "iban": {
+                    "title": "IBAN",
+                    "transCode": "schema.people.iban",
+                    "type": "string",
+                    "required": false
+                },
+                "swift": {
+                    "title": "SWIFT",
+                    "transCode": "schema.people.swift",
+                    "type": "string",
+                    "required": false
+                },
+                "street": {
+                    "title": "Ulica",
+                    "transCode": "schema.people.street",
+                    "type": "string",
+                    "required": true
+                },
+                "houseNumber": {
+                    "title": "Číslo domu",
+                    "transCode": "schema.people.houseNumber",
+                    "type": "string",
+                    "required": true
+                },
+                "city": {
+                    "$ref": "uri://registries/towns#town"
+                },
+                "zipCode": {
+                    "title": "PSČ",
+                    "transCode": "schema.people.zipCode",
+                    "type": "string",
+                    "required": true
+                },
+                "country": {
+                    "$ref": "uri://registries/countries#country"
+                }
+            }
+        },
+        "otherInfo": {
+            "title": "Ostatné údaje",
+            "transCode": "schema.people.otherInfo",
+            "type": "object",
+            "properties": {
+                "idCardNumber": {
+                    "title": "Číslo OP",
+                    "transCode": "schema.people.idCardNumber",
+                    "type": "string",
+                    "required": false
+                },
+                "passportNumber": {
+                    "title": "Číslo pasu",
+                    "transCode": "schema.people.passportNumber",
+                    "type": "string",
+                    "required": false
+                },
+                "note": {
+                    "title": "Poznámka",
+                    "transCode": "schema.people.note",
+                    "type": "string",
+                    "required": false,
+                    "large": true
+                },
+                "language": {
+                    "title": "Jazykové znalosti",
+                    "transCode": "schema.people.language",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "loginInfo": {
+            "title": "Prihlasovacie informácie",
+            "type": "object",
+            "properties": {
+                "isUserBlocked": {
+                    "title": "Zabokovanie užívatela",
+                    "type": "string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "hasToChangePassword": {
+                    "title": "Musí si zmeniť heslo",
+                    "type": "string",
+                    "enum": [
+                        "Áno",
+                        "Nie"
+                    ],
+                    "required": false,
+                    "render": {
+                        "component": "psui-selectbox",
+                        "searchable": true
+                    }
+                },
+                "dateOfLastLogin": {
+                    "title": "Dátum posledného prihlásenia",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfLastUnsuccesfullLogin": {
+                    "title": "Dátum posledného NEÚSPEŠNÉHO prihlásenia",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        },
+        "idInfo": {
+            "title": "Registračný preukaz",
+            "type": "object",
+            "properties": {
+                "currnetId": {
+                    "title": "Aktuálne číslo preukazu člena",
+                    "type": "string",
+                    "required": false
+                },
+                "dateOfExpiration": {
+                    "title": "Dátum platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                },
+                "dateOfApplicationForId": {
+                    "title": "Dátum začiatku platnosti preukazu",
+                    "type": "string",
+                    "required": false,
+                    "render": {
+                        "component": "psui-datepicker"
+                    }
+                }
+            }
+        }
+    }
+}

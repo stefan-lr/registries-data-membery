@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/coach#",
+    "new": {
+        "table": "people",
+        "title": "Tréner",
+        "xxtransCode": "schema.person.title",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/people#person/properties/_security"
+            },
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "coach": {
+                "$ref": "uri://registries/people#person/properties/coach"
+            },
+            "photoInfo": {
+                "$ref": "uri://registries/people#person/properties/photoInfo"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "idInfo": {
+                "$ref": "uri://registries/people#person/properties/idInfo"
+            }
+        }
+    },
+    "view": {
+        "$ref": "uri://registries/coach#new"
+    },
+    "search": {
+        "table": "people",
+        "title": "Tréner",
+        "listFields": {
+            "$ref": "uri://registries/people#person/properties/coach/listFields"
+        },
+        "forcedCriteria": [
+            {
+                "f": "coach.isCoach",
+                "op": "eq",
+                "v": "Áno"
+            }
+        ],
+        "properties": {
+            "baseData": {
+                "$ref": "uri://registries/people#person/properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/people#person/properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/people#person/properties/bankInfo"
+            },
+            "otherInfo": {
+                "$ref": "uri://registries/people#person/properties/otherInfo"
+            },
+            "coach": {
+                "$ref": "uri://registries/people#person/properties/coach"
+            }
+        }
+    }
+}

@@ -1,0 +1,82 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/club#",
+    "new": {
+        "table": "organizations",
+        "title": "Klub",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/organization#properties/_security"
+            },
+            "club": {
+                "$ref": "uri://registries/organization#properties/club"
+            },
+            "clubAdress": {
+                "$ref": "uri://registries/organization#properties/clubAdress"
+            },
+            "logoInfo": {
+                "$ref": "uri://registries/organization#properties/logoInfo"
+            }
+        }
+    },
+    "view": {
+        "table": "organizations",
+        "title": "Klub",
+        "transCode":"schema.club.view",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/organization#properties/_security"
+            },
+            "club": {
+                "$ref": "uri://registries/organization#properties/club"
+            },
+            "clubAdress": {
+                "$ref": "uri://registries/organization#properties/clubAdress"
+            },
+            "logoInfo": {
+                "$ref": "uri://registries/organization#properties/logoInfo"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            }
+        }
+    },
+    "search": {
+        "table": "organizations",
+        "title": "Klub",
+        "listFields": [
+            {
+                "field": "club.codeOfClub",
+                "title": "Klub ID"
+            },
+            {
+                "field": "club.name",
+                "title": "Názov klubu"
+            }
+        ],
+        "forcedCriteria": [
+            {
+                "f": "club",
+                "op": "ex",
+                "v": ""
+            }
+        ],
+        "properties": {
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            },
+            "club": {
+                "$ref": "uri://registries/organization#properties/club"
+            },
+            "clubAdress": {
+                "$ref": "uri://registries/organization#properties/clubAdress"
+            }
+        }
+    }
+}

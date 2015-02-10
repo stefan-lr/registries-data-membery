@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "id": "uri://registries/company#",
+    "new": {
+        "table": "organizations",
+        "title": "Organizácia",
+        "xxtransCode": "schema.org.title",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/organization#properties/_security"
+            },
+            "baseData": {
+                "$ref": "uri://registries/organization#properties/baseData"
+            },
+            "logoInfo": {
+                "$ref": "uri://registries/organization#properties/logoInfo"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            }
+        }
+    },
+    "view": {
+        "table": "organizations",
+        "title": "organizácia",
+        "transCode": "schema.org.view",
+        "properties": {
+            "_security": {
+                "$ref": "uri://registries/organization#properties/_security"
+            },
+            "baseData": {
+                "$ref": "uri://registries/organization#properties/baseData"
+            },
+            "club": {
+                "$ref": "uri://registries/organization#properties/club"
+            },
+            "clubAdress": {
+                "$ref": "uri://registries/organization#properties/clubAdress"
+            },
+            "association": {
+                "$ref": "uri://registries/organization#properties/association"
+            },
+            "associationAdress": {
+                "$ref": "uri://registries/organization#properties/associationAdress"
+            },
+            "logoInfo": {
+                "$ref": "uri://registries/organization#properties/logoInfo"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            }
+        }
+    },
+    "search": {
+        "table": "organizations",
+        "title": "organizácia",
+        "transCode": "schema.org.view",
+        "listFields": {
+            "$ref": "uri://registries/organization#listFields"
+        },
+        "properties": {
+            "baseData": {
+                "$ref": "uri://registries/organization#properties/baseData"
+            },
+            "contactInfo": {
+                "$ref": "uri://registries/organization#properties/contactInfo"
+            },
+            "bankInfo": {
+                "$ref": "uri://registries/organization#properties/bankInfo"
+            },
+            "club": {
+                "$ref": "uri://registries/organization#properties/club"
+            },
+            "clubAdress": {
+                "$ref": "uri://registries/organization#properties/clubAdress"
+            },
+            "association": {
+                "$ref": "uri://registries/organization#properties/association"
+            },
+            "associationAdress": {
+                "$ref": "uri://registries/organization#properties/associationAdress"
+            }
+        }
+    }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Unionsoft demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="copyright" content="Unionsoft" />
+	<meta name="author" content="" />
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="/portal/css/standalone.css">
+	<link rel="stylesheet" type="text/css" href="/portal/css/portal.css">
+	<link rel="stylesheet" type="text/css" href="/portal/css/font-awesome.min.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="portal-main-container">
+		<div id="portal-header-container">
+			<header id="portal-main-header">
+				<h1 >Unionsoft s.r.o.</h1>
+				<h2>Prezentačná verzia</h2>
+				<a href="/">
+					<img class="portal-logo" src="/portal/img/portal-logo.png" alt="logo" title="Unionsoft demo" />
+				</a>
+			</header>
+		</div>
+		<div id="mobile-menu-toggler">
+			<a href="" class="toogle-menu" >
+				<i class="fa fa-align-justify"></i>
+			</a>
+		</div>
+		<div id="portal-menu-panel-container">
+			{% block menu %}
+				<div id="portal-menu-panel">
+					{%for k in menu %}
+						<div class="portal-menu-entry"><a href="/article/{{k.aid}}">{{k.name}}</a>
+							<div class="portal-sub-menu">
+								{% for s in k.subElements %}
+									<div><a href="/article/{{s.aid}}">{{s.name}}</a></div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endfor %}
+					<div class="menu-login-container">
+						<a class="menu-login" href="https:\\test.unionsoft.sk">prihlasit</a>
+					</div>
+				</div>
+			{% endblock menu %}
+		</div>
+		<div id="portal-content-container">
+			<div id="portal-main-content">
+				<article id="portal-article">
+					{% for widget in article.data %}
+						{% set templatePath = "widgets/" + widget.meta.type + ".widget" %}
+						{% include templatePath with widget only %}
+					{% endfor %}
+				</article>
+			</div>
+		</div>
+	</div>
+	<div id="footer-container">
+		<header id="main-footer">
+			Unionsoft, s.r.o, Všetky práva vyhradené
+		</header>
+	</div>
+</body>
+<script>
+	$(function() {
+		$('#portal-menu-panel-container').addClass('mobile-hidden');
+		var mainMenuHidden = true;
+		$('.toogle-menu').click(function (e) {
+			if (mainMenuHidden) {
+				$('#portal-menu-panel-container').removeClass('mobile-hidden');
+				$('header h1').css('visibility', 'hidden');
+				$('header h2').css('visibility', 'hidden');
+				mainMenuHidden = false;
+			} else {
+				$('#portal-menu-panel-container').addClass('mobile-hidden');
+				$('header h1').css('visibility', 'visible');
+				$('header h2').css('visibility', 'visible');
+				mainMenuHidden = true;
+			}
+			e.stopPropagation();
+			return false;
+		});
+		$('body').click(function () {
+			$('#portal-menu-panel-container').addClass('mobile-hidden');
+			$('header h1').css('visibility', 'visible');
+			$('header h2').css('visibility', 'visible');
+			mainMenuHidden = true;
+		});
+		$('.x-portal-widget-showcase-view').each(function() {
+			$(this).bind('showcase-next', function() {
+				var idx = $(this).data('showcase-current') || 0;
+
+				$(this).find('article').eq(idx).fadeOut();
+
+				if (idx == $(this).find('article').length - 1) {
+					idx = 0;
+				} else {
+					++idx;
+				}
+
+				$(this).find('article').eq(idx).fadeIn();
+
+				$(this).data('showcase-current', idx);
+
+				setTimeout(function() {
+					$('.x-portal-widget-showcase-view').triggerHandler('showcase-next');
+				}, 3000);
+			});
+
+		}).triggerHandler('showcase-next');
+
+		$('.x-portal-widget-gallery').each(function(index) {
+
+			$(this).find('.x-portal-widget-gallery-viewer-window-images').append(
+				$(this).find('.x-portal-widget-gallery-thm > img').clone()
+			);
+
+			$(this).bind('gallery-next', function(e, idx) {
+
+			});
+
+			$(this).bind('gallery-show', function(e, idx) {
+				$(this).find('.x-portal-widget-gallery-viewer').css('display', 'table-cell');
+				$(this).data('gallery-current', idx);
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).fadeIn();
+			});
+
+			$(this).bind('gallery-next', function(e) {
+				var idx = $(this).data('gallery-current');
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).fadeOut();
+
+				if (idx == $(this).find('.x-portal-widget-gallery-viewer-window-images > img').length - 1) {
+					idx = 0;
+				} else {
+					++idx;
+				}
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).fadeIn();
+
+				$(this).data('gallery-current', idx);
+			});
+
+			$(this).bind('gallery-prev', function(e) {
+				var idx = $(this).data('gallery-current');
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).fadeOut();
+
+				if (idx == 0) {
+					idx = $(this).find('.x-portal-widget-gallery-viewer-window-images > img').length - 1;
+				} else {
+					--idx;
+				}
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).fadeIn();
+
+				$(this).data('gallery-current', idx);
+			});
+
+			$(this).bind('gallery-close', function(e, idx) {
+				var idx = $(this).data('gallery-current');
+
+				$(this).find('.x-portal-widget-gallery-viewer-window-images > img').eq(idx).hide();
+				$(this).find('.x-portal-widget-gallery-viewer').fadeOut();
+			});
+
+			$(this).find('.x-portal-widget-gallery-close-btn').on('click', function() {
+				$(this).closest('.x-portal-widget-gallery').triggerHandler('gallery-close');
+			});
+
+			$(this).find('.x-portal-widget-gallery-next-btn').on('click', function() {
+				$(this).closest('.x-portal-widget-gallery').triggerHandler('gallery-next');
+			});
+
+			$(this).find('.x-portal-widget-gallery-prev-btn').on('click', function() {
+				$(this).closest('.x-portal-widget-gallery').triggerHandler('gallery-prev');
+			});
+
+			$(this).find('.x-portal-widget-gallery-thm > img').each(function(idx){
+				$(this).on('click', function(evt) {
+					$(this).closest('.x-portal-widget-gallery').triggerHandler('gallery-show', [idx]);
+				});
+			});
+		});
+
+		$('.x-portal-competition-results').bind('competition-results-show', function() {
+			var cid = $(this).find('.x-portal-competition-selector').val();
+			var that = this;
+
+			if (cid) {
+				$.get('/competition/results/'+cid, function(data) {
+					data.sort(function(a,b) { return b.points - a.points;});
+
+					var table = $(that).find('table');
+
+					table.empty();
+
+					var counter = 0;
+					for (var i in data) {
+
+						var e = $('<tr><td style="text-align:right; padding-right: 5px;">'+ (++counter) +'</td><td style="font-weight: bold;">'+ data[i].name +'</td><td style="text-align: right;">'+data[i].matches+'z</td><td style="text-align: right;">'+data[i].points+'b</td><tr>');
+
+						table.append(e);
+					}
+				});
+			}
+		});
+
+		$('.x-portal-competition-results').find('.x-portal-competition-selector').on('change', function() {
+			$(this).closest('.x-portal-competition-results').trigger('competition-results-show');
+		});
+
+		$('.x-portal-competition-matches').bind('competition-matches-show', function() {
+			var cid = $(this).find('.x-portal-competition-selector').val();
+			var that = this;
+
+			if (cid) {
+				$.get('/competition/matches/'+cid, function(data) {
+					function formatDate(d) {
+						return d.substr(6,2) + '.' +d.substr(4,2) + '.' + d.substr(0,4);
+					}
+
+					var table = $(that).find('table');
+
+					table.empty();
+
+					var lastDate = null;
+					for (var i in data) {
+						var currDate = formatDate(data[i].matchDate);
+						if (lastDate !== currDate) {
+							table.append('<tr><td colspan="3" class="x-portal-results-date">'+currDate+'</td></tr>');
+							lastDate = currDate;
+						}
+
+						var e = $('<tr><td class="x-portal-results-left-club">' + data[i].homeName + '</td><td class="x-portal-results-hyphen">'+(data[i].fullTimeScoreHome || '-')+ '&nbsp;-&nbsp;'+(data[i].fullTimeScoreAway || '-')+'</td><td class="x-portal-results-right-club">' + data[i].guestName + '</td></tr>');
+
+						if (data[i].webNo) {
+							e.on('click', null, {webNo: data[i].webNo}, function(evt) {
+								window.open('http://szhonline.sk/onlinex.aspx?cislo=' + evt.data.webNo);
+							});
+							e.addClass('x-portal-results-selectable');
+						}
+						table.append(e);
+					}
+				});
+			}
+		});
+
+		$('.x-portal-competition-matches').find('.x-portal-competition-selector').on('change', function() {
+			$(this).closest('.x-portal-competition-matches').trigger('competition-matches-show');
+		});
+		//get competitions
+		$.get('/competition/list', function(data) {
+			data.sort(function(a,b) {if (a.name > b.name) {return 1;} else if (a.name == b.name) {return 0;} else {return -1;};})
+			$('.x-portal-competition-selector').empty();
+			for (var i in data) {
+				$('.x-portal-competition-selector').append('<option value="'+data[i].id+'">'+ data[i].name +'</option>').trigger('change');;
+			}
+		});
+
+		$('.portal-side-panel.partneri').each(function() {
+			$(this).bind('showcase-next', function() {
+				var idx = $(this).data('showcase-current') || 0;
+
+				$(this).find('article').eq(idx).fadeOut();
+
+				if (idx == $(this).find('article').length - 1) {
+					idx = 0;
+				} else {
+					++idx;
+				}
+
+				$(this).find('article').eq(idx).fadeIn();
+
+				$(this).data('showcase-current', idx);
+
+				setTimeout(function() {
+					$('.portal-side-panel.partneri').triggerHandler('showcase-next');
+				}, 3000);
+			});
+		}).triggerHandler('showcase-next');
+	});
+</script>
+</html>

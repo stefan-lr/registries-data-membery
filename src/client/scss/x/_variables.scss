@@ -1,0 +1,74 @@
+// screens
+// ----------------------------------------
+$screen-min: 320px !default;
+//extra small devices
+$screen-xs: 0px;
+
+//small devices
+$screen-sm: 768px !default; 
+$screen-sm-min: $screen-sm !default;
+
+//middle devices
+$screen-md: 992px !default; 
+$screen-md-min: $screen-md !default;
+
+$screen-xs-max: $screen-sm - 1 !default;
+$screen-sm-max: $screen-md - 1 !default;
+
+// font
+// ----------------------------------------
+$icon-font: FontAwesome !default;
+
+$base-font-size: 16px !default;
+$font-size-middle: 14px !default;
+$font-size-small: 12px !default;
+$font-size-input: $font-size-middle !default;
+
+$line-height: 20px !default;
+
+// layout
+// ----------------------------------------
+$fixed-header-height: 40px !default;
+
+// menu
+// ----------------------------------------
+$menu-width: 250px !default;
+$menu-width-sm: 400px !default;
+$menu-item-font-size: 16px !default;
+$menu-item-height: 40px !default;
+$menu-item-icon-height: 50px !default;
+$menu-item-icon-width: 40px !default;
+$menu-item-icon-offset: 10px !default;
+$menu-item-bottom-offset: 20px !default;
+
+// modalview
+// ----------------------------------------
+$modalview-body-offset: 10px !default;
+
+// fieldset
+// ----------------------------------------
+$fieldset-item-min-height: 34px !default;
+$fieldset-offset: 6px !default;
+
+// inlineedit
+// ----------------------------------------
+$inlineedit-min-height: $fieldset-item-min-height !default;
+
+// string component
+// ----------------------------------------
+$string-font-size: $font-size-input !default;
+$string-offset: $fieldset-offset !default;
+$string-height: 32px !default;
+
+// dropdown component
+// ----------------------------------------
+$dropdown-offset:  $fieldset-offset !default;
+$dropdown-height: $string-height !default;
+
+// calendar component
+// ----------------------------------------
+$calendar-action-offset: 4px 10px;
+
+// date component
+// ----------------------------------------
+$date-dropdown-width: 260px;

@@ -1,0 +1,57 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "uri://registries/season#",
+	"new": {
+		"table" : "seasons",
+		"title" : "Nový suťažný ročník",
+		"xxtransCode": "schema.stadium.title",
+		"listFields": [
+			{"field":"baseData.name", "title":"Názov ročníka"}
+		],
+		"properties":{
+			"_security": {
+				"_create": {
+					"_static": [
+						"Security - write"
+					]
+				},
+				"_read": {
+					"_static": [
+						"Security - read"
+					]
+				},
+				"_modify": {
+					"_static": [
+						"Security - write"
+					]
+				}
+			},
+			"baseData":{
+				"title": "Základné údaje",
+				"type": "object",
+				"properties": {
+					"name": {
+						"title": "Názov",
+						"type": "string",
+						"required": true
+					}
+				}
+			}
+		}
+	},
+	"view" : {
+		"$ref" : "uri://registries/season#new"
+	},
+	"search" : {
+		"table": "seasons",
+		"title": "Súťažný ročník",
+		"listFields": {
+			"$ref": "uri://registries/season#new/listFields"
+		},
+		"properties": {
+				"baseData": {
+					"$ref": "uri://registries/season#new/properties/baseData"
+				}
+		}
+	}
+}

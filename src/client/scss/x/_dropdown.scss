@@ -1,0 +1,42 @@
+.x-dropdown{
+	position: relative;
+	
+	&.x-open{
+		.x-dropdown-content{
+			display: block;
+		}
+	}
+	
+	.x-dropdown-content{
+		display: none;
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		margin-top: $dropdown-height;
+		background-color: #ffffff;
+		border-width: 1px;
+		border-style: solid;
+		border-color: #ddd;
+	}
+	
+	.x-dropdown-action{
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		z-index: 1;
+		cursor: pointer;
+		line-height: $dropdown-height;
+		padding: 0px $dropdown-offset;
+		span{
+			display: none;
+		}
+		&:after{
+			// @include icon-font($icon-calendar-empty);
+		}
+		&:hover{
+			&:after{
+				// content: $icon-calendar;
+			}
+		}
+	}
+}

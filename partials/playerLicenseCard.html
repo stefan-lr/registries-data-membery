@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<div>
+	<style type="text/css">
+		body,html{
+			margin: 0px;
+			padding: 0px;
+			/*height: 100%;*/
+		}
+		div{
+			box-sizing: border-box;
+		}
+
+		.page{
+			margin: 12mm 0mm 0mm 36%;
+		}
+		.font0,
+		.surname, 
+		.name,
+		.text {
+			font: bold 13px 'Arial';
+			line-height: 17px;
+		}
+		.ftont1,
+		.date-from, 
+		.date-to  {
+			font: bold 13px 'Arial';
+			line-height: 15px;
+		}
+
+		.font3,
+		.number
+		 {
+			font: 19px 'Arial';
+			line-height: 21px;
+		}
+
+		.surname{
+			width: 108px;
+		}
+
+		.surname, .name{
+			display: inline-block;
+			margin-bottom: 0px;
+			margin-top: 0px;
+		}
+
+		.number{
+			display: inline-block;
+			padding-left: 22px;
+			margin-top: 16px;
+			margin-bottom: 0px;
+			color: #0000ff;
+			width: 111px;
+			width: 114px;
+		}
+
+		.text{
+			display: inline-block;
+			margin-top: 16px;
+			margin-bottom: 0px;
+		}
+		
+		.date{
+			margin-top: 20px;
+		}
+			
+		.date-from{
+			display: inline-block;
+			width: 113px;
+		}
+		
+		@media print {
+			@page {
+				size: auto; 
+				margin: 0cm;
+			}
+			body{
+				margin: 0px !important;
+				padding: 0px !important;
+			}
+			.page{
+				margin: 12mm 0mm 0mm 93mm;
+			}
+			.no-print{
+				display: none !important;
+			}
+			#main-wrapper > header{
+				display: none !important;
+			}
+			.number{
+				color: #0000ff !important;
+			}
+		}
+		
+
+		.date-to{
+			display: inline-block;
+		}
+
+		.buttons .print{
+		   	color: #0000ee;
+    		display: inline-block;
+    		padding: 0 10px;
+    		text-decoration: underline;	
+			margin: 10mm 0mm 0mm 93mm;
+			padding: 6px 20px;
+			cursor: pointer;
+			text-align: left;
+			vertical-align: middle;
+			cursor: pointer;
+			white-space: nowrap;
+		}
+		.buttons .print:hover{
+    		text-decoration: none;	
+		}
+		@media screen {
+			
+		}
+		
+	</style>
+	<div class="page">
+		<div class="surname">{{model.baseData.surName}}</div>
+		<div class="name">{{model.baseData.name}}</div>
+		<div><div class="number">{{model.player.playerLicense}}</div><div class="text">hráč</div>
+		</div>
+		<div class="date"><div class="date-from">{{model.player.dateOfRegistration | dateToString}}</div><div ng-if="model.player.validTo" class="date-to">{{model.player.validTo | dateToString}}</div><div ng-if="!model.player.validTo" class="date-to">neobmedzené</div>
+		</div>
+		<div class="no-print buttons"><a href="#" class='print' onClick="window.print();return false;"><span>Tlač</span></a></div>
+		</div>
+	</div>
+</div>	
